@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_REGISTRY: "registry.gi..."
+
+build:
+  stage: build
+  image: galang:1.20
+  script:
+    - go build -o app
+  artifacts:
+    paths:
+      - app
+
+test:
+  stage: test
+  script:
+    - gp test ./...
+
+deploy:
+  stage: deploy
+  image: docker:20.10.24
+  script:
+    - docker build -t $DOCKER_REGISTRY/app .
+    - docker push $DOCKER_REGISTRY/app
+  only:
+    - master
