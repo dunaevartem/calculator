@@ -17,6 +17,7 @@ build:
 
 test:
   stage: test
+  image: golang:1.24.9
   script:
     - go test ./...
 
