@@ -34,7 +34,7 @@ deploy:
       - deploy
 #  image: docker:20.10.24
   script:
-    - scp app $DEPLOY_USER@$DEPLOY_SERVER:/deploy
+    - sudo scp app $DEPLOY_USER@$DEPLOY_SERVER:/deploy
 #    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" 192.168.1.50:8929 --password-stdin
 #    - docker build -t $DOCKER_REGISTRY/app .
 #    - docker push $DOCKER_REGISTRY/app
