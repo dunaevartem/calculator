@@ -7,8 +7,10 @@ variables:
   DOCKER_REGISTRY: 192.168.1.50:8929
   DEPLOY_USER: testing
   DEPLOY_SERVER: "192.168.1.50" 
+
 build:
   stage: build
+  tag: build
   image: golang:1.24.9
   script:
     - go build -o app
@@ -18,6 +20,7 @@ build:
 
 test:
   stage: test
+  tag: test
   image: golang:1.24.9
   script:
     - go test ./...
@@ -25,6 +28,7 @@ test:
 
 deploy:
   stage: deploy
+  tag: deploy
 #  image: docker:20.10.24
   script:
     - scp app $DEPLOY_USER@$DEPLOY_SERVER:/deploy
