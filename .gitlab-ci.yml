@@ -5,7 +5,8 @@ stages:
 
 variables:
   DOCKER_REGISTRY: 192.168.1.50:8929
-
+  DEPLOY_USER: testing
+  DEPLOY_SERVER: "192.168.1.50" 
 build:
   stage: build
   image: golang:1.24.9
@@ -23,10 +24,11 @@ test:
 
 deploy:
   stage: deploy
-  image: docker:20.10.24
+#  image: docker:20.10.24
   script:
-    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" 192.168.1.50:8929 --password-stdin
-    - docker build -t $DOCKER_REGISTRY/app .
-    - docker push $DOCKER_REGISTRY/app
+    - scp app $DEPLOY_USER@$DEPLOY_SERVER:/deploy
+#    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" 192.168.1.50:8929 --password-stdin
+#    - docker build -t $DOCKER_REGISTRY/app .
+#    - docker push $DOCKER_REGISTRY/app
   only:
     - master
