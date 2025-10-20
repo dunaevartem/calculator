@@ -4,7 +4,6 @@ stages:
   - deploy
 
 variables:
-  DEPLOY_SERVER: "192.168.1.101"  # Укажите IP вашего сервера
   ANSIBLE_PLAYBOOK: "deploy.yml"   # Путь к playbook
   ANSIBLE_HOSTS: "hosts"          # Путь к файлу hosts
 

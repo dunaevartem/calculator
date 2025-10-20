@@ -1,2 +1,2 @@
 [web_server]
-{{ DEPLOY_SERVER }}
+192.168.1.101
