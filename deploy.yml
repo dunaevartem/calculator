@@ -1,11 +1,25 @@
 ---
-- hosts: server
-  become: yes
+- name: Деплой приложения
+  hosts: web_server
   tasks:
-    - name: Copy app to deploy directory
+    - name: Копируем приложение
       copy:
-        src: app
+        src: ./app
         dest: /deploy/app
         mode: 0755
-    - name: Make app executable
-      command: chmod +x /deploy/app
+
+    - name: Создаем файл сервиса
+      copy:
+        src: ./myapp.service
+        dest: /etc/systemd/system/myapp.service
+
+    - name: Перезагружаем systemd
+      systemd:
+        name: myapp
+        state: reloaded
+    
+    - name: Запускаем службу
+      systemd:
+        name: myapp
+        state: started
+        enabled: yes
