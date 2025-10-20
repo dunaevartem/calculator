@@ -1,2 +1,2 @@
-[server]
+[web_server]
 {{ DEPLOY_SERVER }}
