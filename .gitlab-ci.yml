@@ -32,6 +32,6 @@ deploy:
   tags: 
       - deploy
   script:
-    - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK
+    - sudo ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK
   only:
     - master
