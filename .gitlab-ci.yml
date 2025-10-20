@@ -4,9 +4,9 @@ stages:
   - deploy
 
 variables:
-  DOCKER_REGISTRY: 192.168.1.50:8929
-  DEPLOY_USER: testing
-  DEPLOY_SERVER: "192.168.1.50" 
+  DEPLOY_SERVER: "192.168.1.50"  # Укажите IP вашего сервера
+  ANSIBLE_PLAYBOOK: "deploy.yml"   # Путь к playbook
+  ANSIBLE_HOSTS: "hosts"          # Путь к файлу hosts
 
 build:
   stage: build
@@ -32,11 +32,7 @@ deploy:
   stage: deploy
   tags: 
       - deploy
-#  image: docker:20.10.24
   script:
-    - scp app $DEPLOY_USER@$DEPLOY_SERVER:/deploy
-#    - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USER" 192.168.1.50:8929 --password-stdin
-#    - docker build -t $DOCKER_REGISTRY/app .
-#    - docker push $DOCKER_REGISTRY/app
+    - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK
   only:
     - master

@@ -1,0 +1,11 @@
+---
+- hosts: server
+  become: yes
+  tasks:
+    - name: Copy app to deploy directory
+      copy:
+        src: app
+        dest: /deploy/app
+        mode: 0755
+    - name: Make app executable
+      command: chmod +x /deploy/app
