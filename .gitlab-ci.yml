@@ -32,6 +32,8 @@ deploy:
       - deploy
   image: ubuntu:24.04
   script:
+    - apt update
+    - apt install -y ansible
     - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK
   only:
     - master
