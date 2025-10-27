@@ -34,6 +34,11 @@ deploy:
   script:
     - apt update
     - apt install -y ansible
-    - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK
+    - mkdir -p /tmp/ssh
+    - ssh-keygen -t ed25519 -f /tmp/ssh/id_rsa -N ""
+    - chmod 600 /tmp/ssh/id_rsa
+    - ssh-copy-id -i /tmp/ssh/id_rsa.pub 192.168.1.101
+    - ssh-keyscan 192.168.1.101 >> /root/.ssh/known_hosts
+    - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK --become
   only:
     - master
