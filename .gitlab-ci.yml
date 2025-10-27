@@ -41,7 +41,7 @@ deploy:
     - chown testing:testing /home/testing/.ssh
     - su - testing -c "ssh-keygen -t ed25519 -f /home/testing/.ssh/id_rsa -N ''"
     - su - testing -c "chmod 600 /home/testing/.ssh/id_rsa"
-    - su - testing -c "ssh-copy-id -i /home/testing/.ssh/id_rsa.pub 192.168.1.101"
+    - su - testing -c "ssh-copy-id -o StrictHostKeyChecking=no -i /home/testing/.ssh/id_rsa.pub 192.168.1.101"
     - su - testing -c "ssh-keyscan 192.168.1.101 >> /home/testing/.ssh/known_hosts"
     - su - testing -c "ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become"
   only:
