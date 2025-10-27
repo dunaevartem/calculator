@@ -40,7 +40,7 @@ deploy:
     - mkdir -p /testing/.ssh  # Ключевое исправление
     - chmod 700 /testing/.ssh  # Ключевое исправление
     - ssh-copy-id -i /tmp/ssh/id_rsa.pub -o "StrictHostKeyChecking=no" 192.168.1.101
-    - ssh-keyscan 192.168.1.101 >> /root/.ssh/known_hosts
+    - ssh-keyscan 192.168.1.101 >> /testing/.ssh/known_hosts
     - ansible-playbook -i "$ANSIBLE_HOSTS" $ANSIBLE_PLAYBOOK --become
   only:
     - master
