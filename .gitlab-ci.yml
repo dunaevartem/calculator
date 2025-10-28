@@ -34,7 +34,6 @@ deploy:
   script:
     - apt update
     - apt install -y ansible sudo
-    - su - testing -c "ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become"
-  #  - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become
+    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become
   only:
     - master
