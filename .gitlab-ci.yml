@@ -31,7 +31,7 @@ deploy:
   tags: 
       - deploy
   image: ubuntu:24.04
-    before_script:
+  before_script:
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
