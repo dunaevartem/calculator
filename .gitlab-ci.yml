@@ -30,10 +30,10 @@ deploy:
   stage: deploy
   tags: 
       - deploy
-  #image: ubuntu:24.04
+  image: ubuntu:24.04
   script:
-  #  - apt update
-  #  - apt install -y ansible
-    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become
+    - apt update
+    - apt install -y ansible
+    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become -o StrictHostKeyChecking=no
   only:
     - master
