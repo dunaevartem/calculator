@@ -30,7 +30,7 @@ deploy:
   stage: deploy
   tags: 
       - deploy
-  image: ubuntu:24.04
+  #image: ubuntu:24.04
   script:
   #  - apt update
   #  - apt install -y ansible
