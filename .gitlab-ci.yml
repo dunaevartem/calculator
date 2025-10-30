@@ -33,10 +33,10 @@ deploy:
   image: ubuntu:24.04
   before_script:
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H 192.168.1.101 >> ~/.ssh/known_hosts
-    - export ANSIBLE_PRIVATE_KEY_FILE=~/.ssh/id_rsa
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+  #  - ssh-keyscan -H 192.168.1.101 >> ~/.ssh/known_hosts
+    - export ANSIBLE_PRIVATE_KEY_FILE=~/.ssh/id_ed25519
   script:
     - apt update
     - apt install -y ansible
