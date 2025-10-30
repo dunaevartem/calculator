@@ -3,6 +3,14 @@
   hosts: web_server
   become: yes
   tasks:
+    - name: Создаём каталог /deploy
+      file:
+        path: /deploy
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+        
     - name: Копируем приложение
       copy:
         src: ./app
