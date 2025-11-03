@@ -17,6 +17,13 @@
         dest: /deploy/app
         mode: 0755
 
+    - name: Копируем шаблоны
+      copy:
+        src: ./templates/
+        dest: /deploy/templates/
+        mode: '0755'         
+        recurse: yes          
+
     - name: Создаем файл сервиса
       copy:
         src: ./myapp.service
