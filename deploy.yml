@@ -19,7 +19,7 @@
         mode: 0755
 
     - name: Копируем шаблоны
-      copy:
+      ansible.builtin.copy:
         src: ./templates/
         dest: /deploy/templates/
         mode: 0755
