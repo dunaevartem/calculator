@@ -24,8 +24,6 @@
         dest: /deploy/templates/
         mode: 0755
         recurse: yes
-        owner: root
-        group: root
 
     - name: Создаём файл сервиса
       copy:
