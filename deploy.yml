@@ -22,7 +22,7 @@
       ansible.builtin.command:
         cmd: cp -R "{{ playbook_dir }}/templates" "/deploy/templates"
         mode: 0755
-        recurse: yes
+#        recurse: yes
 
     - name: Создаём файл сервиса
       copy:
