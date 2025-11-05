@@ -19,8 +19,11 @@
         mode: 0755
 
     - name: Копируем шаблоны
-      ansible.builtin.command:
-        cmd: cp -Rp "{{ playbook_dir }}/templates" "/deploy/templates"
+      ansible.builtin.copy:
+        src: ./templates/
+        dest: /deploy/templates/
+        mode: '0755'
+        recurse: yes
 
     - name: Создаём файл сервиса
       copy:
