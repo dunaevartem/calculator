@@ -41,7 +41,7 @@ deploy:
   script:
     - apt update
     - apt install -y ansible
-    - apt purge ansible
+    - apt purge -y ansible
     - ansible --version
     - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become --module-path=/root/.ansible/collections/plugins/modules
   only:
