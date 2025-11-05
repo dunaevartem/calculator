@@ -20,13 +20,6 @@
         dest: /deploy/app
         mode: 0755
 
-    - name: Копируем шаблоны
-      ansible.builtin.copy:
-        src: ./templates/
-        dest: /deploy/templates/
-        mode: '0755'
-        recurse: yes
-
     - name: Создаём файл сервиса
       copy:
         src: ./myapp.service
