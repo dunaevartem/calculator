@@ -42,6 +42,6 @@ deploy:
     - apt update
     - apt install -y ansible
     - ansible --version
-    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become
+    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become --module-path=/root/.ansible/collections/plugins/modules
   only:
     - master
