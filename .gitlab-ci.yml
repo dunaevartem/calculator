@@ -41,7 +41,7 @@ deploy:
   script:
     - apt update
     - apt install -y ansible
-    - mkdir templates
+    - mkdir -p templates
     - cp -r .templates/* templates/
 
     - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become --module-path=/root/.ansible/collections/plugins/modules
