@@ -19,11 +19,12 @@
         dest: /deploy/app
         mode: 0755
 
-    - name: Копируем файлы
+    - name: Копируем все шаблоны из каталога templates/
       copy:
-        src: ./templates/*
-        dest: /deploy/templates/*
+        src: templates/
+        dest: /deploy/templates/
         mode: 0755
+        recursive: yes
 
     - name: Создаём файл сервиса
       copy:
