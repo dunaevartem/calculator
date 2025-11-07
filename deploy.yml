@@ -27,7 +27,7 @@
     - name: "Копируем файлы из templates в /deploy"
       copy:
         src: templates/
-        dest: /deploy
+        dest: /deploy/templates
 
     - name: Создаём файл сервиса
       copy:
