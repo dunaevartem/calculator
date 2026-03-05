@@ -1,0 +1,12 @@
+replicaCount: 2
+image:
+  repository: IMAGE_PLACEHOLDER
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  host: kurtonic.local

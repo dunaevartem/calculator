@@ -9,6 +9,10 @@ func main() {
     r := gin.Default()
     r.LoadHTMLGlob("templates/*.html")
 
+    r.GET("/health", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"status": "UP"})
+    })
+
     r.GET("/", func(c *gin.Context) {
         c.HTML(200, "index.html", gin.H{})
     })

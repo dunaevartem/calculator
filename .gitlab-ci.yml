@@ -1,46 +1,53 @@
 stages:
   - build
   - test
+  - push
   - deploy
 
 variables:
-  ANSIBLE_PLAYBOOK: "deploy.yml"   # Путь к playbook
-  ANSIBLE_HOSTS: "hosts"          # Путь к файлу hosts
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
 
-build:
+# 1. Сборка бинарника
+build_app:
   stage: build
-  tags: 
-      - build
-  image: golang:1.24.9
+  image: golang:1.24.0
   script:
     - go build -o app
   artifacts:
     paths:
       - app
 
-test:
+# 2. Тестирование (вернули стадию)
+test_app:
   stage: test
-  tags: 
-      - test
-  image: golang:1.24.9
+  image: golang:1.24.0
   script:
     - go test ./...
 
-deploy:
-  stage: deploy
-  tags: 
-      - deploy
-  image: ubuntu:24.04
-  before_script:
-    - apt-get update && apt-get install -y openssh-client
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-    - chmod 600 ~/.ssh/id_ed25519
-    - export ANSIBLE_PRIVATE_KEY_FILE=~/.ssh/id_ed25519
-    - ssh-keyscan -H 192.168.1.101 >> ~/.ssh/known_hosts
+# 3. Сборка образа через Kaniko (без привилегий)
+build_image:
+  stage: push
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - apt update
-    - apt install -y ansible
-    - ansible-playbook -i $ANSIBLE_HOSTS $ANSIBLE_PLAYBOOK --become --module-path=/root/.ansible/collections/plugins/modules
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$(printf "%s:%s" "$CI_REGISTRY_USER" "$CI_REGISTRY_PASSWORD" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
+      --destination "${IMAGE_TAG}"
+
+# 4. Деплой через Helm
+deploy_k8s:
+  stage: deploy
+  image: alpine/helm:latest
+  script:
+    - mkdir -p ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config
+    - chmod 600 ~/.kube/config
+    - helm upgrade --install go-app ./charts/go-app \
+        --namespace default \
+        --set image.repository=$IMAGE_TAG \
+        --wait
   only:
     - master
