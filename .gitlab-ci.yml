@@ -51,11 +51,12 @@ deploy_k8s:
     - deploy
   image: alpine/helm:latest
   script:
-    - mkdir -p ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config
+    - mkdir -p ~/.kube
+    - echo "$KUBECONFIG_FILE" > ~/.kube/config
     - chmod 600 ~/.kube/config
-    - helm upgrade --install go-app ./charts/go-app \
-        --namespace default \
-        --set image.repository=$IMAGE_TAG \
+    - helm upgrade --install go-app ./charts/go-app 
+        --namespace default 
+        --set image.repository=$IMAGE_TAG 
         --wait
   only:
     - master
