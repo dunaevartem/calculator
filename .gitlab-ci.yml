@@ -10,6 +10,8 @@ variables:
 # 1. Сборка бинарника
 build_app:
   stage: build
+  tags:
+    - build
   image: golang:1.24.0
   script:
     - go build -o app
@@ -20,6 +22,8 @@ build_app:
 # 2. Тестирование (вернули стадию)
 test_app:
   stage: test
+  tags:
+    - test
   image: golang:1.24.0
   script:
     - go test ./...
@@ -27,6 +31,8 @@ test_app:
 # 3. Сборка образа через Kaniko (без привилегий)
 build_image:
   stage: push
+  tags:
+    - push
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -41,6 +47,8 @@ build_image:
 # 4. Деплой через Helm
 deploy_k8s:
   stage: deploy
+  tags:
+    - deploy
   image: alpine/helm:latest
   script:
     - mkdir -p ~/.kube && echo "$KUBECONFIG_FILE" > ~/.kube/config
