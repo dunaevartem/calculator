@@ -10,3 +10,6 @@ service:
 ingress:
   enabled: true
   host: kurtonic.local
+
+imagePullSecrets:
+  - name: gitlab-registry-key
