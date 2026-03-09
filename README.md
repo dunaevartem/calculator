@@ -23,7 +23,7 @@ graph TD
     GoService -->|5. Load Balancing| Pod1[Pod: replica-1]
     GoService -->|5. Load Balancing| Pod2[Pod: replica-2]
 
-    subgraph "K8s Cluster &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+    subgraph "K8s Cluster"
         IngressRule
         GoService
         Pod1
@@ -90,3 +90,4 @@ __Проверить статус здоровья:__
 curl http://kurtonic.local
 
 ```
+
