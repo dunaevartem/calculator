@@ -10,6 +10,7 @@ CI/CD: GitLab CI + Kaniko (rootless image build)
 Проект демонстрирует полный путь запроса от клиента до контейнера в изолированной сети.
 
 mermaid
+
 graph TD
     User((Пользователь)) -->|1. http://kurtonic.local| Hosts[Файл /etc/hosts]
     Hosts -->|2. IP: 192.168.1.50| IngressSVC[Ingress Controller]
