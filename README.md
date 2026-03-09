@@ -9,8 +9,7 @@ CI/CD: GitLab CI + Kaniko (rootless image build)
 # Архитектура и трафик
 Проект демонстрирует полный путь запроса от клиента до контейнера в изолированной сети.
 
-mermaid
-
+```mermaid
 graph TD
     User((Пользователь)) -->|1. http://kurtonic.local| Hosts[Файл /etc/hosts]
     Hosts -->|2. IP: 192.168.1.50| IngressSVC[Ingress Controller]
@@ -25,7 +24,7 @@ graph TD
         Pod1
         Pod2
     end
-
+```
 
 # CI/CD Pipeline
 Автоматизация реализована через .gitlab-ci.yaml и включает 4 стадии:
