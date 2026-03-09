@@ -71,12 +71,12 @@ helm upgrade --install go-app ./charts/go-app \
 
 # Структура репозитория
 
-__main.go__ — Серверная логика и API (Gin).
-__templates/__ — UI шаблоны (index, result, error).
-__charts/go-app/__ — Helm-чарт (Deployment на 2 реплики, ClusterIP Service, Ingress).
-__Dockerfile__ — Легковесный образ на базе Alpine.
-__test/__ — Модульные тесты приложения.
-__myapp.service__ — (Legacy) Конфиг для запуска через systemd.
+* __main.go__ — Серверная логика и API (Gin).
+* __templates/__ — UI шаблоны (index, result, error).
+* __charts/go-app/__ — Helm-чарт (Deployment на 2 реплики, ClusterIP Service, Ingress).
+* __Dockerfile__ — Легковесный образ на базе Alpine.
+* __test/__ — Модульные тесты приложения.
+* __myapp.service__ — (Legacy) Конфиг для запуска через systemd.
 
 # Мониторинг и отладка
 
