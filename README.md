@@ -1,4 +1,4 @@
-# Go Calculator (K8s Cloud-Native Project)
+# Go Calculator (K8s Project)
 
 Веб-приложение для вычислений, написанное на Go, развернутое в Kubernetes-кластере с использованием современного стека автоматизации.
 
@@ -88,4 +88,5 @@ kubectl logs -l app.kubernetes.io/name=go-app -f
 __Проверить статус здоровья:__
 ```
 curl http://kurtonic.local
+
 ```
