@@ -66,7 +66,7 @@ helm upgrade --install go-app ./charts/go-app \
 
 Добавьте запись в /etc/hosts:
 
-<указываем_ваш_ip_хоста> kurtonic.local
+192.168.1.50 kurtonic.local
 
 
 # Структура репозитория
