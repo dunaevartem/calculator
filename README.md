@@ -88,10 +88,11 @@ kubectl logs -l app.kubernetes.io/name=go-app -f
 __Проверить статус здоровья:__
 ```
 curl http://kurtonic.local
+```
 
 ## Лицензия
 
 Данный проект распространяется под лицензией **MIT**. Подробности в файле [LICENSE](LICENSE).
 
-```
+
 
